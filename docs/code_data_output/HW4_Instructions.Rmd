@@ -1,0 +1,517 @@
+---
+title: "HW 4 Instructions"
+author: "Penelope Pooler Eisenbies"
+date: "HW 4 is Due 10/12/2022"
+output: 
+  html_document:
+    toc: true
+    toc_depth: 4
+    toc_float: true
+---
+
+```{r setup, include=F}
+
+# this line specifies options for default options for all R Chunks
+knitr::opts_chunk$set(echo=T, highlight=T)
+
+# suppress scientific notation
+options(scipen=100)
+
+# install helper package (pacman) if needed
+if (!require("pacman")) install.packages("pacman", repos = "http://lib.stat.cmu.edu/R/CRAN/")
+
+# install and load required packages
+# pacman should be first package in parentheses and then list others
+pacman::p_load(pacman, tidyverse, magrittr, lubridate, ggthemes)
+
+# verify packages 
+p_loaded()
+
+```
+
+---
+
+This assignment will give you experience with:
+
+- Creating an R Project Directory and a code_data_output folder (Review)
+
+- Creating, saving, using an R Markdown file (Review)
+
+- Importing and Cleaning Data
+
+- Modifying and using R functions
+
+- Joining datasets using `full_join`
+
+- Reshaping and modifying data for a plot (Review)
+
+- Creating a fully formatted plot
+
+- Knitting an R Markdown file (Review)
+
+- Creating a README file (Review)
+
+---
+
+## Instructions
+
+### HW 4 - First Steps
+
+**`0.`** You are encouraged to work with others and and experiment with sharing code (.Rmd files), but each student should create their own project and .Rmd file to submit.
+
+**`1.`** Create an R project named **`HW 4 <first name> <last name>`**
+   
+**`2.`** Create a folder in your R project labeled **`code_data_output`**.
+
+- Save these three .csv files to your code data output folder:
+  - `bls_unemp_rate.csv`
+  - `bls_import_index.csv` 
+  - `bls_export_index.csv` 
+
+3.  Download the provided file, **[`HW4_Template.Rmd`]()** and change the title to be HW 4.
+
+- Change file name to be **`HW4_FirstName_LastName.Rmd`**
+
+  - For example, I would change the template file to be named **`HW4_Penelope_Pooler.Rmd`**
+   
+- Change title in the file header to be 'HW 4'
+   
+- Specify yourself as the author
+
+<br>
+
+**NOTES** 
+
+- Provided header text below shows the correct format.
+
+- This header text also creates a floating Table of Contents (toc).
+   
+```
+---
+title: "HW 4"
+authors: "Penelope Pooler"
+date: "Due 10/12/2022"
+output: 
+  html_document:
+    toc: true
+    toc_depth: 4
+    toc_float: true
+---
+
+```
+
+<br>
+
+**`5.`** Modify the **`setup`** chunk 
+
+- The **`setup`** chunk text shown below has packages and setup options for HW 4.
+
+- Copy and paste text into the setup chunk of your HW 4 Markdown (**`.Rmd`**) file that you created from the provided template.
+   
+```
+
+# this line specifies options for default options for all R Chunks
+knitr::opts_chunk$set(echo=T, highlight=T)
+
+# suppress scientific notation
+options(scipen=100)
+
+# install helper package (pacman) if needed
+if (!require("pacman")) install.packages("pacman", repos = "http://lib.stat.cmu.edu/R/CRAN/")
+
+# install and load required packages
+# pacman should be first package in parentheses and then list others
+pacman::p_load(pacman, tidyverse, magrittr, gridExtra, lubridate, 
+               knitr, kableExtra)
+
+# verify packages 
+p_loaded()
+
+```
+
+<br>
+
+**`6.`** Click the green triangle or type Ctrl/Cmd + Shift + Enter to run this setup chunk.
+
+---
+
+### HW 4 - Part 0
+
+Examine `Export` and `Import` datasets from BLS
+
+   - [Documentation on Import and Export Price Indixes](https://www.bls.gov/mxp/)
+
+   - [Additional Documention provided by Investopedia](https://www.investopedia.com/terms/i/import-export-prices.asp)
+
+   - Note number of rows to skip in `.csv` files
+
+---
+
+### HW 4 - Part 1
+
+#### Chunk 2: Create `bls_tidy` function from provided code.
+
+**`0.`** Remove `#` in front of `bls_tidy <- function(...){`
+   and the following 2 lines.
+
+**`1.`** Copy code from `read_csv(...` to `rename("unemp_rate" = "value")` and paste it within the body of the function.
+
+Notice the three function inputs are:
+
+- `data_file`
+- `skip_num`
+- `var_name`
+
+<br>
+    
+**`2.`** Make the following replacements to turn the code used for one dataset into a function that can be used for any `bls` dataset.
+
+- Replace the name of the dataset, `"bls_unemp_rate.csv"`, with the text, `data_file` (no quotes) in the `read_csv` command.
+
+- Replace `11` with `skip_num` in the `read_csv` command.
+
+- Replace the last line of the fuction with this line:
+  - `rename({{var_name}} := "value")`
+  
+**NOTES:**  
+ 
+- The `rename` command is modified to work within a function. 
+
+- This command uses the `var_name` input.
+ 
+<br>
+  
+**`3.`** Run the function code and examine the saved function by clicking on it in the Global Environment to verify it is correct.
+
+**`4.`** Use the function to import the `"bls_unemp_rate.csv"` dataset and save it as `unemp`, by specifying these inputs with commas in between:
+
+- `data_file = "bls_unemp_rate.csv", skip_num = 11, var_name = "unemp_rate"`
+
+
+<br>
+
+
+#### BB Question 1
+
+Match each input of the `bls_tidy` function to the correct description.
+
+-   `data_file =`
+
+-   `skip_num =`
+
+-   `var_name =`
+
+<br>
+
+
+
+#### BB Question 2
+
+In this imported example dataset, the number of rows skipped (`skip_num`) was 11 rows and you can verify this by examining the `bls_unemp_rate.csv` file.
+
+In the next part, we will use the `bls_tidy` function to import `bls_export_index.csv` and `bls_import_index.csv`.
+
+Before doing that, examine these two data files in Excel to answer this question:
+
+Fill in the blank:
+ 
+-   `____` rows will need to be skipped when these two files are imported.
+
+<br>
+
+### HW 4 - Part 2
+
+#### Chunk 3: Use function to import two datasets.
+
+**`1.`** Run function to import `export_index.csv` and save it as `export_index`. For this dataset, the function inputs are:
+
+- `data_file = "export_index.csv", skip_num = ____, var_name = "exp_indx"` 
+   
+- Replace the `____`with the answer from BB Question 2.
+
+<br>
+
+**`2.`**  Run function to import `import_index.csv` and save it as `import_index`.
+
+- Replace the inputs to be appropriate for the `import_index` dataset
+
+<br>
+
+3.  Use `summary` to examine the numerical variable in each dataset.
+
+- e.g. 
+`summary(export_index$exp_indx)` 
+ 
+**OR** 
+`export_index |> pull(exp_indx) |> summary()`
+
+<br>
+
+#### BB Question 3
+
+Each imported tidy dataset has
+
+-   `____` observations
+
+-   `____` variables
+
+<br>
+
+#### BB Question 4
+
+Verify that two separate variables/datasets have been imported correctly.
+
+You can examine datasets, by clicking on them in the `Global Environment` or by using the
+`summary` command.
+
+-   The minimum value of the export index, is `____`.
+
+-   The maximum value of the export index is `____`.
+
+-   The minimum value of the import index is `____`.
+
+-   The maximum value of the import index is `____`.
+
+---
+
+### HW 4 - Part 3
+
+#### Chunk 4: Join datasets and create date variable.
+
+1.  Use `full_join` to create new dataset named `export_import` that includes
+
+- `Year`
+
+- `month`
+
+- the export index variable, `exp_indx`
+
+- the import index variable, `imp_indx`
+
+- Note that because there are two matching variables in these two datasets, R will use those variables for the join by default.
+
+<br> 
+
+2.  Use `paste` and `ym` on the `Year` and `month` variables within a `mutate` command to create a `date` variable:
+
+- `date = ym(paste(Year, month))`
+ 
+
+**NOTES:**
+    
+- The command `paste` concatenates the characters from the `Year` and `month` variables, e.g. `2022 Jan`
+
+- The command `ym` specifies that that `Year` (`y`) and `month` (`m`) in the pasted text will be converted to a date.
+
+<br>
+
+
+#### BB Question 5
+
+What two variables are common to both datasets and used by R to do the full_join?
+
+Enter variable names exactly as they appear in both datasets.
+
+-   `____`
+
+-   `____`
+
+
+<br>
+
+
+#### BB Question 6
+
+As mentioned above, the `lubridate` command `ym` is able to create a `date` variable without day,
+using only the `Year` and `month` variables in the data.
+
+What **day** of the month does this created `date` variable show by default?
+
+For example, the earliest `date` in the dataset is
+
+-   `2012-01-____`.
+
+
+---
+
+### HW 4 - Part 4
+
+#### Chunk 5: Reshape, format data for plot
+
+Create a new dataset, `exp_imp_plt` and complete the following steps: 
+
+** Use`select` to keep three variables: `date`, `exp_indx`,`imp_indx`  
+
+**`2.`**  Use pivot_longer so that you have three columns:
+
+- `date` column (already) 
+
+- `index` column showing type of index, export or import
+
+- `value` column showing value of export index or import index
+
+<br>
+
+**`3.`**  Convert index to a factor variable in a mutate statement with these levels and labels:
+
+- `levels = c("exp_indx", "imp_indx")`
+
+- `labels = c("Export", "Import")`
+
+- Note that the same order must be used in the levels and labels options
+
+---
+
+### HW 4 - Part 5
+
+#### Chunk 6: Create Formatted Line Plot
+
+**`0.`** Remove `, eval = F` from header of Chunk 6
+
+**`1.`** Create unformatted line plot with 2 lines: 1 line for each index:
+
+- Replace `____` with name of reshaped data with `type` factor variable from previous
+chunk.
+
+- Complete `geom_line` command by adding aesthetic, `aes()`.
+
+- Inside `aes()`: `x = date, y = value, color = type` 
+  
+- After `aes()`: add a comma and then specify `size = 1` to create thicker lines.
+
+<br>
+
+**`2.`** Add the following 4 options by follwing the `geom_line` command with a plus (`+`) and then adding a plus (`+`) after each option
+
+```
+theme_classic                                           # can opt for different theme
+
+theme(legend.position="bottom")                         # moves legend to bottom
+  
+scale_color_manual(values=c("lightblue","blue"))        # specifies colors
+                                                        # many other color options 
+                                                  
+scale_x_date(date_breaks = "year", date_labels = "%Y")  # formats x axis to show each year
+
+```
+
+<br>
+
+**`3.`** Complete labs command using example plot below.
+
+- All text should be in quotes.
+
+- `color = ""` has been completed for you to supress label for legend.
+
+- `title` and `subtitle` text are shown at the top.
+
+- `x` and `y` axis labels are shown on the respective axes.
+
+- NOTE: For `caption = ` Omit 2nd line.  Only need `Data Source: www.bls.gov`
+
+---
+
+### Example of Fully Formatted Line Plot: 
+
+![](LinePlot_HW4_Penelope_Pooler.png)
+
+---
+
+
+#### BB Question 7:
+
+Examine the plot and then fill in the blanks with the correct years:
+NOte: Tick marks for years indicate the BEGINNING of each year.
+
+-   The Import Price Index was higher than the Export Price Index from `____` to `____`.
+
+-   The Import and Export Price Indices were approximately equal from `____` to `____`.
+
+-   The Export Price Index has been higher than the Import Price Index since early `____`.
+
+
+
+
+### HW 4 - Final Steps
+
+**`1.`** Save your completed HW4 R Markdown File to your `code_data_output` folder.
+
+**`2.`** Knit your R markdown File.
+
+-  This will be an `.html` file
+
+<br>
+
+**`3.`** Answer all Blackboard questions associated with this assignment.
+
+**`4.`** Create a `README.txt` file using the template provided in HW 4 folder.
+
+- All three .csv files used for this assignment should be
+  - included in your `code_data_output` folder
+  - listed in your README under **DATA AND OTHER INPUT FILES**
+  
+**`5.`** Zip your entire Project Directory into a compressed File and submit it.
+
+- The zipped R Porject should be named **`HW 4 FirstName LastName`**.
+- The zipped project directory should contain:
+  - The completed README file 
+  - The .Rproj file
+  - The code_data_output folder that contains
+    - completed markdown file (.Rmd)
+    - knitted .html file
+    - All three `.csv` data files
+
+<br>
+
+---
+
+## Grading Criteria
+
+**(10 pts.)** Blackboard questions for HW 4 are worth 1 or 2 points.
+
+<br>
+
+**(3 pts.)** Completing **HW 4 - First Steps** as specified 
+
+- All three datasets must be saved to `code_data_output` folder 
+
+<br>
+
+**(3 pts.)** Part 1: Full credit for
+
+- creating `bls_tidy` function and using it to import and clean `bls_unemp_rate.csv`
+
+<br>
+
+**(2 pts.)** Part 2: Full credit for
+
+- correctly using the `bls_tidy` function you created to import the two separate datasets
+
+<br>
+
+**(2 pts.)** Part 3: Full credit for
+
+- correctly joining the two datasets and creating a new date variable
+
+<br>
+
+**(2 pts.)** Part 4: Full credit for
+
+- for correctly reshaping data and creating index factor variable
+
+<br>
+
+**(2 pts.)** Part 5: Full credit for
+
+- 2 pts for creating fully formatted plot as specified
+
+<br>
+
+**(3 pts.)** Completing the **HW 4 - Final Steps** and correctly submitting your
+    zipped project directory.
+
+- 1 point for creating a correct README file that is saved in your outer folder.
+
+- 1 point for having `.Rmd`, `.html`, and all three `.csv` files in your code_data_output folder.
+
+- 1 point for zipping and submitting your project correctly

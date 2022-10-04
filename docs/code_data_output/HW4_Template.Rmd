@@ -1,0 +1,114 @@
+---
+title: "HW 4 Template"
+author: "Fill in your name"
+date: "HW 4 is Due 10/12/2022"
+output: 
+  html_document:
+    toc: true
+    toc_depth: 4
+    toc_float: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+---
+
+### HW 4 - Part 1
+
+#### Chunk 2: Create `bls_tidy` function from provided code.
+
+```{r create bls_tidy function}
+
+# import and clean bls data
+unemp_orig <- read_csv("bls_unemp_rate.csv", skip = 11, show_col_types = F) |> 
+  pivot_longer(cols = Jan:Dec,                      # reshapes data
+               names_to = "month", 
+               values_to = "value") |>
+  filter(!is.na(value)) |>                          # removes missing values
+  rename("unemp_rate" = "value")                    # renames quantitative var 
+
+
+# bls_tidy <- function(data_file, skip_num, var_name){
+#
+#  
+#}
+
+
+
+
+
+# unemp <- bls_tidy()
+
+```
+
+
+---
+
+
+### HW 4 - Part 2
+
+#### Chunk 3: Use function to import two datasets.
+
+```{r import export_index and import_index datasets}
+
+# export_index <- bls_tidy()
+
+# import_index <- bls_tidy()
+
+```
+
+
+---
+
+### HW 4 - Part 3
+
+#### Chunk 4: Join datasets and create date variable.
+
+```{r join datasets and create data var}
+
+# export_import <- full_join() 
+
+
+```
+
+
+### Part 4
+
+#### Chunk 5: Reshape, format and plot data
+
+```{r reshape format and plot data}
+
+# exp_imp_plt <- export_import |>
+
+
+```
+
+
+### Part 5
+
+#### Chunk 6: Create Formatted Plot
+
+```{r reshape format and plot data, eval=F}
+
+
+(exp_imp_lineplot <- _____ |>     # replace blank with name of dataset
+  ggplot() +
+  geom_line()+                    # complete geom_line command
+  
+  # 4 options from instructions go here
+  # add plus signs after each option
+   
+  labs(x = , 
+       y = , 
+       color = ,
+       title = , 
+       subtitle = ,
+       caption = ))
+
+```
+
+
+
+

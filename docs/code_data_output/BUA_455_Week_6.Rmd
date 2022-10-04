@@ -1,41 +1,25 @@
 ---
-title: "BUA 455 - Week 6"
-
-subtitle: "Reshaping Cleaning and Joining Data"  
+title: "BUA 455 - Week 6: Reshaping, Cleaning, and Joining Data"
 author: "Penelope Pooler Eisenbies"
-date: '`r Sys.Date()`'
-output:
-  xaringan::moon_reader:
-    seal: false
-    css: xaringan-themer.css
-    nature:
-      slideNumberFormat: "%current%/%total%" 
-      highlightStyle: tomorrow-night-bright
-      highlightLines: true
-      ratio: 16:9
-      countIncrementalSlides: true
-      keep_md: true
+date: "`r Sys.Date()`"
+output: 
+  html_document: 
+    code_folding: hide
+    toc: yes
+    toc_depth: 4
+    toc_float: yes
 ---
 
-```{r setup, include=FALSE, echo=FALSE}
-options(htmltools.dir.version = FALSE)
-knitr::opts_chunk$set(
-  fig.retina=2,
-  #out.width = "75%",
-  #out.height = "50%",
-  htmltools.preserve.raw = FALSE,      # needed for windows
-  scipen=100,                          # suppresses scientific notation
-  getSymbols.warning4.0 = FALSE,       # suppresses getSymbols warnings
-  cache = FALSE,
-  echo = TRUE,
-  hiline = TRUE,
-  message = FALSE, 
-  warning = FALSE
-)
+```{r setup, include=TRUE}
 
+# this line specifies options for default options for all R Chunks
+knitr::opts_chunk$set(echo=T, 
+                      highlight=T)
 
-# install helper package (pacman)
-# pacman loads and installs other packages, if needed
+# suppress scientific notation
+options(scipen=100)
+
+# install helper package (pacman), if needed
 if (!require("pacman")) install.packages("pacman", repos = "http://lib.stat.cmu.edu/R/CRAN/")
 
 # install and load required packages
@@ -45,114 +29,8 @@ pacman::p_load(pacman, tidyverse, magrittr, lubridate)
 # verify packages (comment out in finished documents)
 p_loaded()
 
-
 ```
 
-```{r xaringan-themer, include=FALSE, warning=FALSE}
-library(xaringanthemer)
-
-palette <- c(
-  SU_Orange1        = "#F76900",
-  SU_Orange2        = "#FF8E00",
-  SU_Red_Orange     = "#FF431B",
-  SU_Blue1          = "#000E54",
-  SU_Blue2          = "#203299",
-  SU_Light_Blue     = "#2B72D7",
-  SU_White          = "#FFFFFF",
-  SU_Light_Gray     = "#ADB3B8",
-  SU_Medium_Gray    = "#707780",
-  SU_Black          = "#000000", 
-  
-  steel_blue        = "#4682B4",
-  corn_flower_blue  = "#6495ED",
-  deep_sky_blue     = "#00BFFF",
-  dark_magenta      = "#8B008B",
-  medium_orchid     = "#BA55D3",
-  lime_green        = "#32CD32",
-  light_sea_green   = "#20B2AA",
-  chartreuse        = "#7FFF00",
-  orange_red        = "#FF4500",
-  white_smoke       = "#F5F5F5",
-  dark_cyan         = "#008B8B",
-  light_steel_blue  = "#B0C4DE",
-  indigo            = "#4B0082",
-  ivory             = "#FFFFF0",
-  light_slate_grey  = "#778899",
-  linen             = "#FAF0E6",
-  steel_blue        = "#4682B4",
-  blue_violet       = "#8A2BE2",
-  dodger_blue       = "#1E90FF",
-  light_blue        = "#ADD8E6",
-  azure             = "#F0FFFF",
-  lavender          = "#E6E6FA")
-
-primary_color = "#4682B4"                # steel_blue
-secondary_color = "#778899"              # light_slate_grey
-white_color = "#FFFFF0"                  # ivory
-black_color = "#000080"                  # navy
-
-style_duo_accent(
-  primary_color = primary_color,
-  secondary_color = secondary_color,
-  white_color = white_color,
-  black_color = black_color,
-  text_color = black_color,
-  header_color = primary_color,
-  background_color = white_color,
-  code_inline_background_color = "#E6E6FA", # lavender
-  link_color = "#1E90FF",                   # dodger_blue
-  code_inline_color = "#4B0082",            # indigo
-  text_bold_color = "#8B008B",              # dark_magenta
-  header_font_google = google_font("Open Sans"),
-  text_font_google = google_font("Open Sans"),
-  code_font_google = google_font("Source Code Pro"),
-  colors = palette
-)
-
-
-```
-
-```{r xaringan-panelset, echo=FALSE}
-xaringanExtra::use_panelset()
-```
-
-```{r xaringan-tile-view, echo=FALSE}
-xaringanExtra::use_tile_view()
-```
-
-```{r xaringan-fit-screen, echo=FALSE}
-xaringanExtra::use_fit_screen()
-```
-
-```{r xaringan-tachyons, echo=FALSE}
-xaringanExtra::use_tachyons()
-```
-
-```{r xaringan-animate-css, echo=FALSE}
-xaringanExtra::use_animate_css()
-```
-
-```{r xaringan-animate-all, echo=FALSE}
-#xaringanExtra::use_animate_all("slide_up")
-```
-
-background-image: url("docs_files/images/sloth_faded.png")
-background-size: cover
-
-class: bottom, right
-
-## BUA 455 - Week 6 
-
-### Reshaping, Cleaning, and Joining Data  
-
-<br>
-
-
-#### Penelope Pooler Eisenbies
-
-#### `r Sys.Date()`
-
-[Wikipedia Sloth Page](https://en.wikipedia.org/wiki/Sloth)
 
 ---
 
@@ -180,13 +58,11 @@ class: bottom, right
 
 ### Recall from Lecture 9:
 
-.pull-left[
-
 #### R functions:
 
 - Useful for automating repetitive, detailed, data management
 
-#### Best Practices for Writng Functions:
+Best Practices:
 
 - Plan what you want to do 
 
@@ -200,24 +76,12 @@ class: bottom, right
 
   - When in doubt, make the function more general and less specific so it is more useful
   
-]
-  
-.pull-right[
-
-![](docs_files/images/owl.png)
-]
-
-
-
-
 ---
 
 #### Anatomy of a Function (Option 1):
 
 - Commands within function **are not saved** to an object.
 - Function results are automatically 'kicked out' as output.
-
-
 
 ```
 Function_Name <- function(input_1, input_2, etc){
@@ -348,13 +212,7 @@ dmy("1st of March, 2022")   # example of lubridate command dmy
 paste("Hello", "Goodbye")   # example of paste
 
 "February 28" # example of month and day only
-```
 
----
-
-### Lubridate Examples Continued
-
-```{r more examples of lubridate}
 paste("February", 2022)   # using paste to add year to month and day
 
 my(paste("February", "2022"))   # using lubridate example with paste
@@ -364,6 +222,7 @@ my(paste("February", "2022"))   # using lubridate example with paste
 ymd(20220401)   # example of lubridate command ymd 
 
 Sys.Date()   #demo of Sys.date
+
 ```
 
 ---
@@ -378,25 +237,15 @@ What is the correct `lubridate` command to convert "March 1st, 2022" to a date v
 
 **Hint:** Test out commands in console to see what the output is.
 
-<br>
-
-.center[
-
-![](docs_files/images/beaver.png)
-
-]
-
-
-
 ---
 
 ### Function Format Options
 
-.panelset[
+#### Option 1
 
-.panel[.panel-name[**Option 1**]
 - No objects are saved within function and result is `kicked out`
 - Ideal for straightforward functions and plot functions
+
 ```{r option 1 for functions}
 
 bom_cln <- function(data_file, yr, skip_num){   
@@ -419,9 +268,9 @@ bom2018_Op1 <- bom_cln(data_file = "box_office_mojo_2018.csv", yr = 2018, skip_n
 
 ```
 
-]
 
-.panel[.panel-name[**Option 2**]
+#### Option 2
+
 - Commands within function are saved to an object, `d_out`
 - Function ends with `d_out` so that result gets `kicked-out` of function
 ```{r option 2 for functions}
@@ -446,9 +295,9 @@ bom2018_Op2 <- bom_cln(data_file = "box_office_mojo_2018.csv", yr = 2018, skip_n
 
 ```
 
-]
 
-.panel[.panel-name[**Option 3**]
+#### Option 3
+
 - This option has 1 more input, `out_file`, to export clean data using `write_csv`
 - Useful for providing `clean` data to a client or colleague that doesn't use R
 ```{r option 3 for functions}
@@ -474,10 +323,6 @@ bom2018_Op3 <- bom_cln_out(data_file = "box_office_mojo_2018.csv", yr = 2018, sk
 
 ```
 
-]
-
-]
-
 ---
 
 ### Week 6 In-class Exercises (TP L10 - Q2)
@@ -490,13 +335,6 @@ What happens if you use Option 2 where you save work to an object, `d_out`, but 
 
 **In-class Demo:** Edit the Option 2 function by removing the `d_out` at the end to see what happens.
 
-<br>
-
-.center[
-
-![](docs_files/images/beaver.png)
-
-]
 
 ---
 
@@ -584,9 +422,7 @@ In HW 4 you will use data from the [Bureau of Labor Statistics](https://www.bls.
 
 ---
 
-.panelset[
-
-.panel[.panel-name[**Modify Data**]
+### Modify Data
 
 Reshape data and create a factor variable with plot label text (Similar to Hw 4 - Part 4)
 
@@ -600,9 +436,8 @@ bom_plot_data <- bom_2018_2021 |>
 head(bom_plot_data)
 ```
 
-]
 
-.panel[.panel-name[**Basic Plot**]
+### Basic Plot
 
 ```{r create basic line plot, fig.dim=c(15,5)}
 (bom_ln_plot <- bom_plot_data |>
@@ -611,9 +446,7 @@ head(bom_plot_data)
   theme_classic())
 ```
 
-]
-
-.panel[.panel-name[**Legend & Lines**]
+### Legend & Lines
 
 ```{r modify legend and lines, fig.dim=c(15,5)}
 (bom_ln_plot <- bom_plot_data |>
@@ -624,9 +457,8 @@ head(bom_plot_data)
   scale_color_manual(values=c("lightblue","blue")))
 ```
 
-]
 
-.panel[.panel-name[**X-axis & Labels**]
+### X-axis & Labels
 
 ```{r modify labels and axis breaks, fig.dim=c(15,4.5)}
 (bom_ln_plot  <- bom_ln_plot + 
@@ -638,9 +470,10 @@ head(bom_plot_data)
        caption="Data Source:www.boxoffice.mojo.com"))
 ```
 
-]
 
-.panel[.panel-name[**Text & Border**]
+### Text & Border
+
+- Not required for HW 4
 
 ```{r modify text and borders, fig.dim=c(15,4)}
 (bom_ln_plot  <- bom_ln_plot + 
@@ -653,12 +486,12 @@ head(bom_plot_data)
         panel.border = element_rect(colour = "lightgrey", fill=NA, size=2),
         plot.background = element_rect(colour = "darkgrey", fill=NA, size=2)))
 ```
-]
 
-.panel[.panel-name[**Complete Code**]
+
+### Complete Code
 
 - Similar but more complex than complete plot code for HW 4.
-- Additional formatting is required for these slides.
+- Additional formatting is required for slides
 - HW 4 plot code will end with `labs` command.
 
 ```{r complete code}
@@ -683,9 +516,6 @@ bom_ln_plot <- bom_plot_data |>
         plot.background = element_rect(colour = "darkgrey", fill=NA, size=2))
 ```
 
-]
-
-]
 
 ---
 
@@ -774,7 +604,6 @@ Alternatively, we can join datasets Horizontally if they have matching variables
 
 
 -   All joins are useful
-
 -   I usually (not always) prefer using `full_join` to help in revealing data errors or discrepancies between multiple datasets.
 
 ---
@@ -820,10 +649,6 @@ Alternatively, we can join datasets Horizontally if they have matching variables
   - Use full `full_join` to join `import_index` and `export_index` into one dataset, `export_import`
   - Use correct `lubridate` command and `paste` command to create a date variable
   
----
-
-### Outline of HW 4 Continued
-  
 - Part 4
 
   - Reshape `export_import` dataset using `pivot_longer` to create `exp_imp_plt` that will be used to plot the data.
@@ -832,8 +657,8 @@ Alternatively, we can join datasets Horizontally if they have matching variables
 - Part 5
 
   - Create a formatted line plot with 
-     - One line for the Export Price Index (light blue line)
-     - One line for Import Price Index (blue line)
+    - One line for the Export Price Index (light blue line)
+    - One line for Import Price Index (light blue line)
     
 - Final Steps
 
@@ -847,26 +672,18 @@ Alternatively, we can join datasets Horizontally if they have matching variables
 
 ### Example of HW 4 Final Plot
 **NOTES:**  
+
 - Final HW 4 plot should be almost identical to the one below **EXCEPT** for second line of caption.
 - Slides version has more formatting.  See version in `.html` lecture notes and HW 4 Instructions.
 
 
-
-
 .center[
-![Example HW 4 Line Plot](docs_files/images/LinePlot_HW4_Penelope_Pooler_slides.png)
+![Example HW 4 Line Plot](LinePlot_HW4_Penelope_Pooler.png)
 ]
 
 ---
 
-background-image: url("docs_files/images/tired_panda_faded.png")
-background-size: cover
-
-.pull-left[
-
 ### **Key Points from Week 6**
-
-.bg-azure.b--dark_cyan.ba.bw2.br3.shadow-5.ph2[
 
 **Developing Functions:**
 
@@ -891,19 +708,7 @@ background-size: cover
 - Importing stock data from Yahoo Finance to R
 - **Introducing the Group Project**
 
-]
+<br>
 
-]
-
-.pull-right[
-
-
-.bg-azure.b--dark_cyan.ba.bw2.br3.shadow-5.ph3[
 **You may submit an 'Engagement Question or Comment' about Week 6 lectures until Tuesday, 10/4, at midnight on Blackboard.**
-
-]
-
-
-]
-
 

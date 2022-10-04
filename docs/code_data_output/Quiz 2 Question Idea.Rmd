@@ -1,0 +1,42 @@
+---
+title: "Quiz 2 Ideas"
+author: "Penelope Pooler Eisenbies"
+date: "2022-10-01"
+output: html_document
+---
+
+```{r setup, include=T}
+
+# this line specifies options for default options for all R Chunks
+knitr::opts_chunk$set(echo=T, highlight=T)
+
+# suppress scientific notation
+options(scipen=100)
+
+# install helper package that loads and installs other packages, if needed
+if (!require("pacman")) install.packages("pacman", repos = "http://lib.stat.cmu.edu/R/CRAN/")
+
+# install and load required packages
+pacman::p_load(pacman,tidyverse, magrittr, lubridate)
+
+# verify packages
+p_loaded()
+
+```
+
+
+#### Chunk 7 from HW 4 - Not used: Summarize and Reshape Unemployment Rate by Quarter
+
+```{r summarize reshape unemp by Quarter}
+
+unemp_smry <- unemp |>
+  mutate(date = ym(paste(Year, month)),
+         qtr = quarter(date)) |>
+  group_by(Year, qtr) |>
+  summarize(mn_unemp = mean(unemp_rate) |> round(1))
+
+unemp_smry |> 
+  pivot_wider(names_from = qtr, values_from = mn_unemp) |>
+  kable()
+
+```

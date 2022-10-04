@@ -1,0 +1,173 @@
+---
+title: "HW 4 Template"
+author: "Fill in your name"
+date: "HW 4 is Due 10/12/2022"
+output: 
+  html_document:
+    toc: true
+    toc_depth: 4
+    toc_float: true
+---
+
+```{r setup, include=FALSE}
+
+# this line specifies options for default options for all R Chunks
+knitr::opts_chunk$set(echo=T, highlight=T)
+
+# suppress scientific notation
+options(scipen=100)
+
+# install helper package (pacman) if needed
+if (!require("pacman")) install.packages("pacman", repos = "http://lib.stat.cmu.edu/R/CRAN/")
+
+# install and load required packages
+# pacman should be first package in parentheses and then list others
+pacman::p_load(pacman, tidyverse, magrittr, lubridate, ggthemes)
+
+# verify packages 
+p_loaded()
+
+```
+
+---
+
+### HW 4 - Part 1
+
+#### Chunk 2: Create `bls_tidy` function from provided code.
+
+```{r create bls_tidy function}
+
+# import and clean bls data
+unemp_orig <- read_csv("bls_unemp_rate.csv", skip = 11, show_col_types = F) |> 
+  pivot_longer(cols = Jan:Dec,                      # reshapes data
+               names_to = "month", 
+               values_to = "value") |>
+  filter(!is.na(value)) |>                          # removes missing values
+  rename("unemp_rate" = "value")                    # renames quantitative var 
+
+
+bls_tidy <- function(data_file, skip_num, var_name){
+  read_csv(data_file, skip = skip_num, show_col_types = F) |> 
+  pivot_longer(cols = Jan:Dec,                      
+               names_to = "month", 
+               values_to = "value") |>
+  filter(!is.na(value)) |>                    
+  rename({{var_name}} := "value")                             
+}
+
+unemp <- bls_tidy(data_file = "bls_unemp_rate.csv", skip_num = 11, var_name = "unemp_rate") 
+
+
+```
+
+
+---
+
+
+### HW 4 - Part 2
+
+#### Chunk 3: Use function to import two datasets.
+
+```{r import export_index and import_index datasets}
+
+export_index <- bls_tidy(data_file = "bls_export_index.csv", 
+                         skip_num = 10, 
+                         var_name = "exp_indx")
+
+import_index <- bls_tidy(data_file = "bls_import_index.csv", 
+                         skip_num = 10, 
+                         var_name = "imp_indx")
+
+```
+
+
+---
+
+### HW 4 - Part 3
+
+#### Chunk 4: Join datasets and create date variable.
+
+```{r join datasets and create data var}
+
+export_import <- full_join(export_index, import_index) |> 
+  mutate(date = ym(paste(Year, month)))
+
+
+```
+
+
+### Part 4
+
+#### Chunk 5: Reshape and format date for plot
+
+```{r reshape format and plot data}
+
+exp_imp_plt <- export_import |>
+  select(date, exp_indx, imp_indx) |>
+  pivot_longer(cols=exp_indx:imp_indx, names_to="type", values_to="value") |>
+  mutate(type = factor(type, 
+                       levels = c("exp_indx","imp_indx"),
+                       labels = c("Export", "Import")))
+
+```
+
+
+---
+
+
+### Part 5
+
+#### Chunk 6: Create Formatted Plot
+
+```{r}
+
+(exp_imp_lineplot <- exp_imp_plt |>
+  ggplot() +
+  geom_line(aes(x=date, y=value, color=type), size=1) +
+  theme_classic() +
+  theme(legend.position="bottom") +
+  scale_color_manual(values=c("lightblue","blue")) + 
+  scale_x_date(date_breaks = "year", date_labels = "%Y") +
+  labs(x="Date", y = "Index", color="",
+       title="Import and Export Price Indices", 
+       subtitle="Jan. 2012 - Aug. 2022",
+       caption="Data Source:www.bls.gov"))
+
+
+(exp_imp_lineplot <- exp_imp_lineplot +
+  labs(caption="Data Source:www.bls.gov"))
+               #Example Plot created by Penelope Pooler"))
+
+png("LinePlot_HW4_Penelope_Pooler.png", height=480, width=720)
+exp_imp_lineplot
+dev.off()
+
+
+(exp_imp_lineplot_slides <- exp_imp_plt |>
+  ggplot() +
+  geom_line(aes(x=date, y=value, color=type), size=1) +
+  theme_classic() +
+  theme(legend.position="bottom") +
+  scale_color_manual(values=c("lightblue","blue")) + 
+  scale_x_date(date_breaks = "year", date_labels = "%Y") +
+  labs(x="Date", y = "Index", color="",
+       title="Import and Export Price Indices", 
+       subtitle="Jan. 2012 - Aug. 2022",
+       caption="Data Source:www.bls.gov
+                Example Plot created by Penelope Pooler") + 
+  theme(plot.title = element_text(size = 20),                     # text size and borders
+        plot.subtitle = element_text(size = 15),
+        axis.title = element_text(size=18),
+        axis.text = element_text(size=15),
+        plot.caption = element_text(size = 10),
+        legend.text = element_text(size = 12),
+        panel.border = element_rect(colour = "lightgrey", fill=NA, size=2),
+        plot.background = element_rect(colour = "darkgrey", fill=NA, size=2)))
+
+png("LinePlot_HW4_Penelope_Pooler_slides.png", height=440, width=720)
+exp_imp_lineplot_slides
+dev.off()
+       
+```
+
+

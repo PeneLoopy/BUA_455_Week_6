@@ -1,140 +1,39 @@
----
-title: "BUA 455 - Week 6"
-
-subtitle: "Reshaping Cleaning and Joining Data"  
-author: "Penelope Pooler Eisenbies"
-date: '`r Sys.Date()`'
-output:
-  xaringan::moon_reader:
-    seal: false
-    css: xaringan-themer.css
-    nature:
-      slideNumberFormat: "%current%/%total%" 
-      highlightStyle: tomorrow-night-bright
-      highlightLines: true
-      ratio: 16:9
-      countIncrementalSlides: true
-      keep_md: true
----
-
-```{r setup, include=FALSE, echo=FALSE}
-options(htmltools.dir.version = FALSE)
-knitr::opts_chunk$set(
-  fig.retina=2,
-  #out.width = "75%",
-  #out.height = "50%",
-  htmltools.preserve.raw = FALSE,      # needed for windows
-  scipen=100,                          # suppresses scientific notation
-  getSymbols.warning4.0 = FALSE,       # suppresses getSymbols warnings
-  cache = FALSE,
-  echo = TRUE,
-  hiline = TRUE,
-  message = FALSE, 
-  warning = FALSE
-)
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>BUA 455 - Week 6</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Penelope Pooler Eisenbies" />
+    <meta name="date" content="2022-10-04" />
+    <script src="docs_files/header-attrs/header-attrs.js"></script>
+    <link href="docs_files/panelset/panelset.css" rel="stylesheet" />
+    <script src="docs_files/panelset/panelset.js"></script>
+    <link href="docs_files/tile-view/tile-view.css" rel="stylesheet" />
+    <script src="docs_files/tile-view/tile-view.js"></script>
+    <script src="docs_files/xaringanExtra_fit-screen/fit-screen.js"></script>
+    <link href="docs_files/tachyons/tachyons.min.css" rel="stylesheet" />
+    <link href="docs_files/animate.css/animate.xaringan.css" rel="stylesheet" />
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
 
 
-# install helper package (pacman)
-# pacman loads and installs other packages, if needed
-if (!require("pacman")) install.packages("pacman", repos = "http://lib.stat.cmu.edu/R/CRAN/")
-
-# install and load required packages
-# pacman should be first package in parentheses and then list others
-pacman::p_load(pacman, tidyverse, magrittr, lubridate)
-
-# verify packages (comment out in finished documents)
-p_loaded()
 
 
-```
-
-```{r xaringan-themer, include=FALSE, warning=FALSE}
-library(xaringanthemer)
-
-palette <- c(
-  SU_Orange1        = "#F76900",
-  SU_Orange2        = "#FF8E00",
-  SU_Red_Orange     = "#FF431B",
-  SU_Blue1          = "#000E54",
-  SU_Blue2          = "#203299",
-  SU_Light_Blue     = "#2B72D7",
-  SU_White          = "#FFFFFF",
-  SU_Light_Gray     = "#ADB3B8",
-  SU_Medium_Gray    = "#707780",
-  SU_Black          = "#000000", 
-  
-  steel_blue        = "#4682B4",
-  corn_flower_blue  = "#6495ED",
-  deep_sky_blue     = "#00BFFF",
-  dark_magenta      = "#8B008B",
-  medium_orchid     = "#BA55D3",
-  lime_green        = "#32CD32",
-  light_sea_green   = "#20B2AA",
-  chartreuse        = "#7FFF00",
-  orange_red        = "#FF4500",
-  white_smoke       = "#F5F5F5",
-  dark_cyan         = "#008B8B",
-  light_steel_blue  = "#B0C4DE",
-  indigo            = "#4B0082",
-  ivory             = "#FFFFF0",
-  light_slate_grey  = "#778899",
-  linen             = "#FAF0E6",
-  steel_blue        = "#4682B4",
-  blue_violet       = "#8A2BE2",
-  dodger_blue       = "#1E90FF",
-  light_blue        = "#ADD8E6",
-  azure             = "#F0FFFF",
-  lavender          = "#E6E6FA")
-
-primary_color = "#4682B4"                # steel_blue
-secondary_color = "#778899"              # light_slate_grey
-white_color = "#FFFFF0"                  # ivory
-black_color = "#000080"                  # navy
-
-style_duo_accent(
-  primary_color = primary_color,
-  secondary_color = secondary_color,
-  white_color = white_color,
-  black_color = black_color,
-  text_color = black_color,
-  header_color = primary_color,
-  background_color = white_color,
-  code_inline_background_color = "#E6E6FA", # lavender
-  link_color = "#1E90FF",                   # dodger_blue
-  code_inline_color = "#4B0082",            # indigo
-  text_bold_color = "#8B008B",              # dark_magenta
-  header_font_google = google_font("Open Sans"),
-  text_font_google = google_font("Open Sans"),
-  code_font_google = google_font("Source Code Pro"),
-  colors = palette
-)
 
 
-```
 
-```{r xaringan-panelset, echo=FALSE}
-xaringanExtra::use_panelset()
-```
 
-```{r xaringan-tile-view, echo=FALSE}
-xaringanExtra::use_tile_view()
-```
 
-```{r xaringan-fit-screen, echo=FALSE}
-xaringanExtra::use_fit_screen()
-```
 
-```{r xaringan-tachyons, echo=FALSE}
-xaringanExtra::use_tachyons()
-```
 
-```{r xaringan-animate-css, echo=FALSE}
-xaringanExtra::use_animate_css()
-```
 
-```{r xaringan-animate-all, echo=FALSE}
-#xaringanExtra::use_animate_all("slide_up")
-```
+
+
+
+
+
 
 background-image: url("docs_files/images/sloth_faded.png")
 background-size: cover
@@ -145,12 +44,12 @@ class: bottom, right
 
 ### Reshaping, Cleaning, and Joining Data  
 
-<br>
+&lt;br&gt;
 
 
 #### Penelope Pooler Eisenbies
 
-#### `r Sys.Date()`
+#### 2022-10-04
 
 [Wikipedia Sloth Page](https://en.wikipedia.org/wiki/Sloth)
 
@@ -164,7 +63,7 @@ class: bottom, right
 
 - I hope that the course TAs and I will have all quizzes graded by next week.
 
-<br>
+&lt;br&gt;
 
 ### Reminder: No class on Thursday, 10/6/22
 
@@ -220,14 +119,14 @@ class: bottom, right
 
 
 ```
-Function_Name <- function(input_1, input_2, etc){
-   command 1 to do "stuff" to inputs |>
-   command 2 to do "stuff" to inputs |>
-   command 3 to do "stuff" to inputs |> etc. # output is autmatically "kicked out"
+Function_Name &lt;- function(input_1, input_2, etc){
+   command 1 to do "stuff" to inputs |&gt;
+   command 2 to do "stuff" to inputs |&gt;
+   command 3 to do "stuff" to inputs |&gt; etc. # output is autmatically "kicked out"
 }
 
 ```
-<br>
+&lt;br&gt;
 
 #### Anatomy of a Function (Option 2):
 
@@ -236,10 +135,10 @@ Function_Name <- function(input_1, input_2, etc){
 
 
 ```
-Function_Name <- function(input_1, input_2, etc){
-   output <- command 1 to do "stuff" to inputs |>
-             command 2 to do "stuff" to inputs |>
-             command 3 to do "stuff" to inputs |> etc.
+Function_Name &lt;- function(input_1, input_2, etc){
+   output &lt;- command 1 to do "stuff" to inputs |&gt;
+             command 2 to do "stuff" to inputs |&gt;
+             command 3 to do "stuff" to inputs |&gt; etc.
    output  # end with name of output so that it is "kicked out" of function
 }
 
@@ -271,7 +170,7 @@ Function_Name <- function(input_1, input_2, etc){
 - Use `gsub` and `as.numeric` to convert each gross variable to numeric:
   
   - `gsub` is used to remove `$` and `,` 
-  - `as.numeric` is used to convert character to numeric decimal value (`<dbl>`).
+  - `as.numeric` is used to convert character to numeric decimal value (`&lt;dbl&gt;`).
 
 
 
@@ -279,54 +178,61 @@ Function_Name <- function(input_1, input_2, etc){
 
 ### Cleaning One Data Set:
 
-```{r cleaning 1 bom dataset}
 
-bom2021 <- read_csv("box_office_mojo_2021.csv", skip=10) |>
-  select(1,4,7,9) |>
+```r
+bom2021 &lt;- read_csv("box_office_mojo_2021.csv", skip=10) |&gt;
+  select(1,4,7,9) |&gt;
   rename("date" = "Date", 
          "top10gross" = "Top 10 Gross", 
          "num_releases" = "Releases",
-         "num1gross" = "Gross") |>
-  filter(!is.na(top10gross)) |>
+         "num1gross" = "Gross") |&gt;
+  filter(!is.na(top10gross)) |&gt;
   mutate(date = dmy(paste(date,2021)),
          top10gross = gsub(pattern="$", replacement="", x=top10gross, fixed=T),
-         top10gross = gsub(pattern=",", replacement="", x=top10gross, fixed=T) |>
+         top10gross = gsub(pattern=",", replacement="", x=top10gross, fixed=T) |&gt;
            as.numeric(),
          
          num1gross = gsub(pattern="$", replacement="", x=num1gross, fixed=T),
-         num1gross = gsub(pattern=",", replacement="", x=num1gross, fixed=T) |>
-           as.numeric()) |>
+         num1gross = gsub(pattern=",", replacement="", x=num1gross, fixed=T) |&gt;
+           as.numeric()) |&gt;
   glimpse()
+```
 
+```
+## Rows: 365
+## Columns: 4
+## $ date         &lt;date&gt; 2021-12-31, 2021-12-30, 2021-12-29, 2021-12-28, 2021-12-…
+## $ top10gross   &lt;dbl&gt; 27601787, 35021475, 34092399, 36104760, 39209841, 5294345…
+## $ num_releases &lt;dbl&gt; 25, 26, 26, 25, 25, 27, 26, 24, 28, 29, 26, 28, 30, 30, 3…
+## $ num1gross    &lt;dbl&gt; 15407695, 20717908, 20327774, 21346817, 24770593, 3328325…
 ```
 
 ---
 
 ### Converting Box Office Mojo Cleaning Code to a Function
 
-```{r bom_cln_function}
 
-bom_cln <- function(data_file, yr, skip_num){   # inputs: data_file is file name
+```r
+bom_cln &lt;- function(data_file, yr, skip_num){   # inputs: data_file is file name
                                                 #         yr is year of data
                                                 #         skip_num is number of header rows to skip
   
-  read_csv(data_file, show_col_types = F, skip=skip_num) |>   # data_file and skip_num used here 
-  select(1,4,7,9) |>                            # columns needed are always the same for bom
+  read_csv(data_file, show_col_types = F, skip=skip_num) |&gt;   # data_file and skip_num used here 
+  select(1,4,7,9) |&gt;                            # columns needed are always the same for bom
   rename("date" = "Date",                       # column renaming always the same
          "top10gross" = "Top 10 Gross", 
          "num_releases" = "Releases",
-         "num1gross" = "Gross") |>
-  filter(!is.na(top10gross)) |>                # filter out non-data rows
+         "num1gross" = "Gross") |&gt;
+  filter(!is.na(top10gross)) |&gt;                # filter out non-data rows
   mutate(date = dmy(paste(date,yr)),           # paste yr input to date text and convert to date
                                                
          top10gross = gsub(pattern="$", replacement="", x=top10gross, fixed=T),
-         top10gross = gsub(pattern=",", replacement="", x=top10gross, fixed=T) |>
+         top10gross = gsub(pattern=",", replacement="", x=top10gross, fixed=T) |&gt;
            as.numeric(),
          num1gross = gsub(pattern="$", replacement="", x=num1gross, fixed=T),
-         num1gross = gsub(pattern=",", replacement="", x=num1gross, fixed=T) |>
+         num1gross = gsub(pattern=",", replacement="", x=num1gross, fixed=T) |&gt;
            as.numeric()) 
 }
-
 ```
 
 ---
@@ -340,30 +246,82 @@ bom_cln <- function(data_file, yr, skip_num){   # inputs: data_file is file name
 - Text must include year, but day is not required (See HW 4)
 
 
-```{r examples of lubridate}
+
+```r
 "1st of March, 2022"   # text date
+```
 
+```
+## [1] "1st of March, 2022"
+```
+
+```r
 dmy("1st of March, 2022")   # example of lubridate command dmy
+```
 
+```
+## [1] "2022-03-01"
+```
+
+```r
 paste("Hello", "Goodbye")   # example of paste
+```
 
+```
+## [1] "Hello Goodbye"
+```
+
+```r
 "February 28" # example of month and day only
+```
+
+```
+## [1] "February 28"
 ```
 
 ---
 
 ### Lubridate Examples Continued
 
-```{r more examples of lubridate}
+
+```r
 paste("February", 2022)   # using paste to add year to month and day
+```
 
+```
+## [1] "February 2022"
+```
+
+```r
 my(paste("February", "2022"))   # using lubridate example with paste
+```
 
+```
+## [1] "2022-02-01"
+```
+
+```r
 "March 1st, 2022"   # different form of text date
+```
 
+```
+## [1] "March 1st, 2022"
+```
+
+```r
 ymd(20220401)   # example of lubridate command ymd 
+```
 
+```
+## [1] "2022-04-01"
+```
+
+```r
 Sys.Date()   #demo of Sys.date
+```
+
+```
+## [1] "2022-10-04"
 ```
 
 ---
@@ -378,7 +336,7 @@ What is the correct `lubridate` command to convert "March 1st, 2022" to a date v
 
 **Hint:** Test out commands in console to see what the output is.
 
-<br>
+&lt;br&gt;
 
 .center[
 
@@ -397,26 +355,25 @@ What is the correct `lubridate` command to convert "March 1st, 2022" to a date v
 .panel[.panel-name[**Option 1**]
 - No objects are saved within function and result is `kicked out`
 - Ideal for straightforward functions and plot functions
-```{r option 1 for functions}
 
-bom_cln <- function(data_file, yr, skip_num){   
-  read_csv(data_file, show_col_types = F, skip=skip_num) |>   # data_file and skip_num used here 
-  select(1,4,7,9) |>                            # columns needed are always the same for these datasets
+```r
+bom_cln &lt;- function(data_file, yr, skip_num){   
+  read_csv(data_file, show_col_types = F, skip=skip_num) |&gt;   # data_file and skip_num used here 
+  select(1,4,7,9) |&gt;                            # columns needed are always the same for these datasets
   rename("date" = "Date",                       # column renaming always the same
          "top10gross" = "Top 10 Gross", 
          "num_releases" = "Releases",
-         "num1gross" = "Gross") |>
-  filter(!is.na(top10gross)) |>                # filter out non-data rows
+         "num1gross" = "Gross") |&gt;
+  filter(!is.na(top10gross)) |&gt;                # filter out non-data rows
   mutate(date = dmy(paste(date,yr)),           # paste yr input to date text and convert to date
          top10gross = gsub(pattern="$", replacement="", x=top10gross, fixed=T),
-         top10gross = gsub(pattern=",", replacement="", x=top10gross, fixed=T) |>
+         top10gross = gsub(pattern=",", replacement="", x=top10gross, fixed=T) |&gt;
            as.numeric(),
          num1gross = gsub(pattern="$", replacement="", x=num1gross, fixed=T),
-         num1gross = gsub(pattern=",", replacement="", x=num1gross, fixed=T) |>
+         num1gross = gsub(pattern=",", replacement="", x=num1gross, fixed=T) |&gt;
            as.numeric()) 
 }
-bom2018_Op1 <- bom_cln(data_file = "box_office_mojo_2018.csv", yr = 2018, skip_num=10) # use function
-
+bom2018_Op1 &lt;- bom_cln(data_file = "box_office_mojo_2018.csv", yr = 2018, skip_num=10) # use function
 ```
 
 ]
@@ -424,26 +381,26 @@ bom2018_Op1 <- bom_cln(data_file = "box_office_mojo_2018.csv", yr = 2018, skip_n
 .panel[.panel-name[**Option 2**]
 - Commands within function are saved to an object, `d_out`
 - Function ends with `d_out` so that result gets `kicked-out` of function
-```{r option 2 for functions}
-bom_cln <- function(data_file, yr, skip_num){   
-  d_out <- read_csv(data_file, show_col_types = F, skip=skip_num) |>   # data_file and skip_num used here
-    select(1,4,7,9) |>                            # columns needed are always the same for these datasets
+
+```r
+bom_cln &lt;- function(data_file, yr, skip_num){   
+  d_out &lt;- read_csv(data_file, show_col_types = F, skip=skip_num) |&gt;   # data_file and skip_num used here
+    select(1,4,7,9) |&gt;                            # columns needed are always the same for these datasets
     rename("date" = "Date",                       # column renaming always the same
            "top10gross" = "Top 10 Gross", 
            "num_releases" = "Releases",
-           "num1gross" = "Gross") |>
-    filter(!is.na(top10gross)) |>                # filter out non-data rows
+           "num1gross" = "Gross") |&gt;
+    filter(!is.na(top10gross)) |&gt;                # filter out non-data rows
     mutate(date = dmy(paste(date,yr)),           # paste yr input to date text and convert to date
            top10gross = gsub(pattern="$", replacement="", x=top10gross, fixed=T),
-           top10gross = gsub(pattern=",", replacement="", x=top10gross, fixed=T) |>
+           top10gross = gsub(pattern=",", replacement="", x=top10gross, fixed=T) |&gt;
              as.numeric(),
            num1gross = gsub(pattern="$", replacement="", x=num1gross, fixed=T),
-           num1gross = gsub(pattern=",", replacement="", x=num1gross, fixed=T) |>
+           num1gross = gsub(pattern=",", replacement="", x=num1gross, fixed=T) |&gt;
              as.numeric()) 
   d_out
 }
-bom2018_Op2 <- bom_cln(data_file = "box_office_mojo_2018.csv", yr = 2018, skip_num=10) # use function
-
+bom2018_Op2 &lt;- bom_cln(data_file = "box_office_mojo_2018.csv", yr = 2018, skip_num=10) # use function
 ```
 
 ]
@@ -451,27 +408,27 @@ bom2018_Op2 <- bom_cln(data_file = "box_office_mojo_2018.csv", yr = 2018, skip_n
 .panel[.panel-name[**Option 3**]
 - This option has 1 more input, `out_file`, to export clean data using `write_csv`
 - Useful for providing `clean` data to a client or colleague that doesn't use R
-```{r option 3 for functions}
-bom_cln_out <- function(data_file, yr, skip_num, out_file){   
-    read_csv(data_file, show_col_types = F, skip=skip_num) |>   # data_file and skip_num used here 
-    select(1,4,7,9) |>                            # columns needed are always the same for these datasets
+
+```r
+bom_cln_out &lt;- function(data_file, yr, skip_num, out_file){   
+    read_csv(data_file, show_col_types = F, skip=skip_num) |&gt;   # data_file and skip_num used here 
+    select(1,4,7,9) |&gt;                            # columns needed are always the same for these datasets
     rename("date" = "Date",                       # column renaming always the same
            "top10gross" = "Top 10 Gross", 
            "num_releases" = "Releases",
-           "num1gross" = "Gross") |>
-    filter(!is.na(top10gross)) |>                # filter out non-data rows
+           "num1gross" = "Gross") |&gt;
+    filter(!is.na(top10gross)) |&gt;                # filter out non-data rows
     mutate(date = dmy(paste(date,yr)),           # paste yr input to date text and convert to date
            top10gross = gsub(pattern="$", replacement="", x=top10gross, fixed=T),
-           top10gross = gsub(pattern=",", replacement="", x=top10gross, fixed=T) |>
+           top10gross = gsub(pattern=",", replacement="", x=top10gross, fixed=T) |&gt;
              as.numeric(),
            num1gross = gsub(pattern="$", replacement="", x=num1gross, fixed=T),
-           num1gross = gsub(pattern=",", replacement="", x=num1gross, fixed=T) |>
-             as.numeric()) |>
+           num1gross = gsub(pattern=",", replacement="", x=num1gross, fixed=T) |&gt;
+             as.numeric()) |&gt;
     write_csv(out_file)
 }
-bom2018_Op3 <- bom_cln_out(data_file = "box_office_mojo_2018.csv", yr = 2018, skip_num=10, 
+bom2018_Op3 &lt;- bom_cln_out(data_file = "box_office_mojo_2018.csv", yr = 2018, skip_num=10, 
                        out_file = "box_office_mojo_2018_tidy.csv") # use function
-
 ```
 
 ]
@@ -490,7 +447,7 @@ What happens if you use Option 2 where you save work to an object, `d_out`, but 
 
 **In-class Demo:** Edit the Option 2 function by removing the `d_out` at the end to see what happens.
 
-<br>
+&lt;br&gt;
 
 .center[
 
@@ -521,23 +478,23 @@ Let's run Option 3, which cleans the data AND exports a cleaned(tidied) version
 
 Note that there will be one error for 2020.
 
-```{r testing our function}
 
-bom2018<- bom_cln_out(data_file = "box_office_mojo_2018.csv", yr = 2018, skip_num=10, 
+```r
+bom2018&lt;- bom_cln_out(data_file = "box_office_mojo_2018.csv", yr = 2018, skip_num=10, 
                        out_file = "box_office_mojo_2018_tidy.csv")
 
-bom2019<- bom_cln_out(data_file = "box_office_mojo_2019.csv", yr = 2019, skip_num=10, 
+bom2019&lt;- bom_cln_out(data_file = "box_office_mojo_2019.csv", yr = 2019, skip_num=10, 
                        out_file = "box_office_mojo_2019_tidy.csv")
 
-bom2020<- bom_cln_out(data_file = "box_office_mojo_2020.csv", yr = 2020, skip_num=10, 
+bom2020&lt;- bom_cln_out(data_file = "box_office_mojo_2020.csv", yr = 2020, skip_num=10, 
                        out_file = "box_office_mojo_2020_tidy.csv")
 
-bom2021<- bom_cln_out(data_file = "box_office_mojo_2021.csv", yr = 2021, skip_num=10, 
+bom2021&lt;- bom_cln_out(data_file = "box_office_mojo_2021.csv", yr = 2021, skip_num=10, 
                        out_file = "box_office_mojo_2021_tidy.csv")
 
 # fix NA due to leapday manually
 # not easily fixed within function
-bom2020$date[is.na(bom2020$date)] <- dmy(29022020)
+bom2020$date[is.na(bom2020$date)] &lt;- dmy(29022020)
 ```
 
 ---
@@ -550,17 +507,27 @@ bom2020$date[is.na(bom2020$date)] <- dmy(29022020)
 
   - Functions are useful for creating identically formatted datasets.
 
-```{r create one bom dataset}
 
+```r
 # join datasets
-bom_2018_2021 <- bind_rows(bom2018, bom2019, bom2020, bom2021)
+bom_2018_2021 &lt;- bind_rows(bom2018, bom2019, bom2020, bom2021)
 
 # Modify gross variables (could also be done in function)
-bom_2018_2021 <- bom_2018_2021 |>
-  mutate(top10grossM = (top10gross/1000000) |> round(2), 
-         num1grossM = (num1gross/1000000) |> round(2)) |>
+bom_2018_2021 &lt;- bom_2018_2021 |&gt;
+  mutate(top10grossM = (top10gross/1000000) |&gt; round(2), 
+         num1grossM = (num1gross/1000000) |&gt; round(2)) |&gt;
   glimpse()
+```
 
+```
+## Rows: 1,455
+## Columns: 6
+## $ date         &lt;date&gt; 2018-12-31, 2018-12-30, 2018-12-29, 2018-12-28, 2018-12-…
+## $ top10gross   &lt;dbl&gt; 36240441, 50932176, 58118460, 56667767, 51671321, 5557976…
+## $ num_releases &lt;dbl&gt; 53, 51, 51, 51, 53, 52, 53, 49, 53, 52, 53, 60, 63, 59, 6…
+## $ num1gross    &lt;dbl&gt; 10011638, 16440551, 18632907, 17041113, 14622228, 1690351…
+## $ top10grossM  &lt;dbl&gt; 36.24, 50.93, 58.12, 56.67, 51.67, 55.58, 70.90, 31.75, 4…
+## $ num1grossM   &lt;dbl&gt; 10.01, 16.44, 18.63, 17.04, 14.62, 16.90, 21.98, 10.85, 1…
 ```
 
 ---
@@ -590,33 +557,50 @@ In HW 4 you will use data from the [Bureau of Labor Statistics](https://www.bls.
 
 Reshape data and create a factor variable with plot label text (Similar to Hw 4 - Part 4)
 
-```{r modify data for lineplot}
-bom_plot_data <- bom_2018_2021 |>
-  select(date, top10grossM, num1grossM) |>
-  pivot_longer(cols=top10grossM:num1grossM, names_to = "type", values_to="grossM") |>
+
+```r
+bom_plot_data &lt;- bom_2018_2021 |&gt;
+  select(date, top10grossM, num1grossM) |&gt;
+  pivot_longer(cols=top10grossM:num1grossM, names_to = "type", values_to="grossM") |&gt;
   mutate(type=factor(type, 
                      levels=c("top10grossM", "num1grossM"), 
                      labels=c("Top 10", "No. 1"))) 
 head(bom_plot_data)
 ```
 
+```
+## # A tibble: 6 × 3
+##   date       type   grossM
+##   &lt;date&gt;     &lt;fct&gt;   &lt;dbl&gt;
+## 1 2018-12-31 Top 10   36.2
+## 2 2018-12-31 No. 1    10.0
+## 3 2018-12-30 Top 10   50.9
+## 4 2018-12-30 No. 1    16.4
+## 5 2018-12-29 Top 10   58.1
+## 6 2018-12-29 No. 1    18.6
+```
+
 ]
 
 .panel[.panel-name[**Basic Plot**]
 
-```{r create basic line plot, fig.dim=c(15,5)}
-(bom_ln_plot <- bom_plot_data |>
+
+```r
+(bom_ln_plot &lt;- bom_plot_data |&gt;
   ggplot() +
   geom_line(aes(x=date, y=grossM, color=type)) + 
   theme_classic())
 ```
 
+&lt;img src="docs_files/figure-html/create basic line plot-1.png" width="1080" /&gt;
+
 ]
 
-.panel[.panel-name[**Legend & Lines**]
+.panel[.panel-name[**Legend &amp; Lines**]
 
-```{r modify legend and lines, fig.dim=c(15,5)}
-(bom_ln_plot <- bom_plot_data |>
+
+```r
+(bom_ln_plot &lt;- bom_plot_data |&gt;
   ggplot() +
   geom_line(aes(x=date, y=grossM, color=type), size=0.75) + 
   theme_classic() +
@@ -624,12 +608,15 @@ head(bom_plot_data)
   scale_color_manual(values=c("lightblue","blue")))
 ```
 
+&lt;img src="docs_files/figure-html/modify legend and lines-1.png" width="1080" /&gt;
+
 ]
 
-.panel[.panel-name[**X-axis & Labels**]
+.panel[.panel-name[**X-axis &amp; Labels**]
 
-```{r modify labels and axis breaks, fig.dim=c(15,4.5)}
-(bom_ln_plot  <- bom_ln_plot + 
+
+```r
+(bom_ln_plot  &lt;- bom_ln_plot + 
   scale_x_date(date_breaks = "3 months",         # OG code for date_labels
                  date_labels = "%b") +
   labs(x="Date", y = "Gross ($Mill)", color="",  # modify plot labels
@@ -638,12 +625,15 @@ head(bom_plot_data)
        caption="Data Source:www.boxoffice.mojo.com"))
 ```
 
+&lt;img src="docs_files/figure-html/modify labels and axis breaks-1.png" width="1080" /&gt;
+
 ]
 
-.panel[.panel-name[**Text & Border**]
+.panel[.panel-name[**Text &amp; Border**]
 
-```{r modify text and borders, fig.dim=c(15,4)}
-(bom_ln_plot  <- bom_ln_plot + 
+
+```r
+(bom_ln_plot  &lt;- bom_ln_plot + 
      theme(plot.title = element_text(size = 20),
         plot.subtitle = element_text(size = 15),
         axis.title = element_text(size=18),
@@ -653,6 +643,8 @@ head(bom_plot_data)
         panel.border = element_rect(colour = "lightgrey", fill=NA, size=2),
         plot.background = element_rect(colour = "darkgrey", fill=NA, size=2)))
 ```
+
+&lt;img src="docs_files/figure-html/modify text and borders-1.png" width="1080" /&gt;
 ]
 
 .panel[.panel-name[**Complete Code**]
@@ -661,8 +653,9 @@ head(bom_plot_data)
 - Additional formatting is required for these slides.
 - HW 4 plot code will end with `labs` command.
 
-```{r complete code}
-bom_ln_plot <- bom_plot_data |>
+
+```r
+bom_ln_plot &lt;- bom_plot_data |&gt;
   ggplot() +
   geom_line(aes(x=date, y=grossM, color=type), size=0.75) + 
   theme_classic() +
@@ -691,10 +684,7 @@ bom_ln_plot <- bom_plot_data |>
 
 ### Final Formatted Line Plot
 
-```{r final plot, echo = F, fig.dim=c(15,6)}
-bom_ln_plot
-
-```
+&lt;img src="docs_files/figure-html/final plot-1.png" width="1080" /&gt;
 
 ---
 
@@ -743,7 +733,7 @@ The Import and Export Price Indices contain data on changes in the prices of non
 
 - [Additional Documention provided by Investopedia](https://www.investopedia.com/terms/i/import-export-prices.asp)
 
-<br>
+&lt;br&gt;
 
 - Before going further, examine these three .csv files to determine number of header rows to skip when cleaning the data
 
@@ -907,3 +897,142 @@ background-size: cover
 ]
 
 
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"slideNumberFormat": "%current%/%total%",
+"highlightStyle": "tomorrow-night-bright",
+"highlightLines": true,
+"ratio": "16:9",
+"countIncrementalSlides": true,
+"keep_md": true
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
