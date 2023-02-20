@@ -1,7 +1,7 @@
 ---
 title: "HW 4 Template"
 author: "Fill in your name"
-date: "HW 4 is Due 10/12/2022"
+date: "HW 4 is Due 3/1/2023"
 output: 
   html_document:
     toc: true
@@ -74,11 +74,11 @@ unemp_orig <- read_csv("bls_unemp_rate.csv", skip = 11, show_col_types = F) |>
 ```
 
 
-### Part 4
+### HW 4 - Part 4
 
 #### Chunk 5: Reshape, format and plot data
 
-```{r reshape format and plot data}
+```{r reshape and format plot data}
 
 # exp_imp_plt <- export_import |>
 
@@ -86,11 +86,11 @@ unemp_orig <- read_csv("bls_unemp_rate.csv", skip = 11, show_col_types = F) |>
 ```
 
 
-### Part 5
+### HW 4 - Part 5
 
 #### Chunk 6: Create Formatted Plot
 
-```{r reshape format and plot data, eval=F}
+```{r create and save plot, eval=F}
 
 
 (exp_imp_lineplot <- _____ |>     # replace blank with name of dataset

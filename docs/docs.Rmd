@@ -158,23 +158,18 @@ class: bottom, right
 
 ### Comments About Quiz 1
 
-- There are two student who will make-up Quiz 1 because of absences for legitimate documented reasons.
+- Grading is in progress, but can not be discussed until all grades are entered.
 
-- Grading is in progress, but can not be discussed until all students have completed their quiz.
-
-- I hope that the course TAs and I will have all quizzes graded by next week.
+- I hope that all quizzes will be graded by this weekend or early next week.
 
 <br>
 
-### Reminder: No class on Thursday, 10/6/22
+### HW 4 is posted and is due next week on Wednesday, 3/1/22.
 
-### HW 4 is posted and is due next week on Wednesday, 10/12/22.
+- We will work through it together on Thursday
 
-- Demo Videos will be posted on Friday, 10/7/22
+- Demo Videos will be posted later this week.
 
-- Grace period may be extended a few days if needed.
-
-- I will be out of town and not available by email from Friday, 10/14, to Sunday, 10/16.
 
 ---
 
@@ -186,7 +181,7 @@ class: bottom, right
 
 - Useful for automating repetitive, detailed, data management
 
-#### Best Practices for Writng Functions:
+#### Best Practices for Writing Functions:
 
 - Plan what you want to do 
 
@@ -368,9 +363,9 @@ Sys.Date()   #demo of Sys.date
 
 ---
 
-### Week 6 In-class Exercises (TP L10 - Q1)
+### Week 6 In-class Exercises (L10 - Q1)
 
-***TurningPoint Session ID: bua455s22***
+***Session ID: bua455s23***
 
 What is the correct `lubridate` command to convert "March 1st, 2022" to a date value in R.
 
@@ -480,9 +475,9 @@ bom2018_Op3 <- bom_cln_out(data_file = "box_office_mojo_2018.csv", yr = 2018, sk
 
 ---
 
-### Week 6 In-class Exercises (TP L10 - Q2)
+### Week 6 In-class Exercises (L10 - Q2)
 
-***TurningPoint Session ID: bua455s22***
+***Session ID: bua455s23***
 
 The end result of any function is an output, e.g. a value, a dataset, a vector, etc.
 
@@ -850,12 +845,14 @@ Alternatively, we can join datasets Horizontally if they have matching variables
 - Final HW 4 plot should be almost identical to the one below **EXCEPT** for second line of caption.
 - Slides version has more formatting.  See version in `.html` lecture notes and HW 4 Instructions.
 
+<center>
 
+```{r  echo=F, out.height=400, out.width=600, out.extra='style="background-color: #3D3D3D; padding:2px;"'}
 
+knitr::include_graphics("docs_files/images/LinePlot_HW4_Penelope_Pooler_slides.png")
 
-.center[
-![Example HW 4 Line Plot](docs_files/images/LinePlot_HW4_Penelope_Pooler_slides.png)
-]
+```
+</center>
 
 ---
 
@@ -897,12 +894,9 @@ background-size: cover
 
 .pull-right[
 
-
 .bg-azure.b--dark_cyan.ba.bw2.br3.shadow-5.ph3[
-**You may submit an 'Engagement Question or Comment' about Week 6 lectures until Tuesday, 10/4, at midnight on Blackboard.**
-
+You may submit an 'Engagement Question' about each lecture until midnight on the day of the lecture. **A minimum of four submissions are required during the semester.**
 ]
-
 
 ]
 

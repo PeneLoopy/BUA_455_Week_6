@@ -36,23 +36,18 @@ p_loaded()
 
 ### Comments About Quiz 1
 
-- There are two student who will make-up Quiz 1 because of absences for legitimate documented reasons.
+- Grading is in progress, but can not be discussed until all grades are entered.
 
-- Grading is in progress, but can not be discussed until all students have completed their quiz.
-
-- I hope that the course TAs and I will have all quizzes graded by next week.
+- I hope that all quizzes will be graded by this weekend or early next week.
 
 <br>
 
-### Reminder: No class on Thursday, 10/6/22
+### HW 4 is posted and is due next week on Wednesday, 3/1/22.
 
-### HW 4 is posted and is due next week on Wednesday, 10/12/22.
+- We will work through it together on Thursday
 
-- Demo Videos will be posted on Friday, 10/7/22
+- Demo Videos will be posted later this week.
 
-- Grace period may be extended a few days if needed.
-
-- I will be out of town and not available by email from Friday, 10/14, to Sunday, 10/16.
 
 ---
 
@@ -710,5 +705,5 @@ Alternatively, we can join datasets Horizontally if they have matching variables
 
 <br>
 
-**You may submit an 'Engagement Question or Comment' about Week 6 lectures until Tuesday, 10/4, at midnight on Blackboard.**
+You may submit an 'Engagement Question' about each lecture until midnight on the day of the lecture. **A minimum of four submissions are required during the semester.**
 
