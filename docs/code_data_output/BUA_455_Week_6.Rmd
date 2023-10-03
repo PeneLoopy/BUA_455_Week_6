@@ -42,7 +42,7 @@ p_loaded()
 
 <br>
 
-### HW 4 is posted and is due next week on Wednesday, 3/1/22.
+### HW 4 is posted and is due next week on Wednesday, 10/11/23.
 
 - We will work through it together on Thursday
 
@@ -50,8 +50,6 @@ p_loaded()
 
 
 ---
-
-### Recall from Lecture 9:
 
 #### R functions:
 
@@ -268,6 +266,7 @@ bom2018_Op1 <- bom_cln(data_file = "box_office_mojo_2018.csv", yr = 2018, skip_n
 
 - Commands within function are saved to an object, `d_out`
 - Function ends with `d_out` so that result gets `kicked-out` of function
+
 ```{r option 2 for functions}
 bom_cln <- function(data_file, yr, skip_num){   
   d_out <- read_csv(data_file, show_col_types = F, skip=skip_num) |>   # data_file and skip_num used here

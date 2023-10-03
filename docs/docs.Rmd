@@ -164,7 +164,7 @@ class: bottom, right
 
 <br>
 
-### HW 4 is posted and is due next week on Wednesday, 3/1/22.
+### HW 4 is posted and is due next week on Wednesday, 10/11/23.
 
 - We will work through it together on Thursday
 
