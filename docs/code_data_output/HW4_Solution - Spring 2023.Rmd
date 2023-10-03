@@ -89,7 +89,8 @@ import_index <- bls_tidy(data_file = "bls_import_index.csv", skip_num=10, var_na
 ```{r join datasets and create data var}
 
 export_import <- full_join(export_index, import_index) |>
-  mutate(date = ym(paste(Year, month)))
+  mutate(date = ym(paste(Year, month)),
+         date_eom = ceiling_date(date, "month") -1)
 
 ```
 
