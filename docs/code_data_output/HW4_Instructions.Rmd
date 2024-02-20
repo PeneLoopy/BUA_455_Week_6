@@ -1,7 +1,7 @@
 ---
 title: "HW 4 Instructions"
 author: "Penelope Pooler Eisenbies"
-date: "HW 4 is Due 10/11/2023 (Grace Period Extended until 10/17)"
+date: "HW 4 is Due 2/28/2023 (Grace Period Extended until 3/1)"
 output: 
   html_document:
     toc: true
@@ -88,7 +88,7 @@ This assignment will give you experience with:
 ---
 title: "HW 4"
 authors: "Penelope Pooler"
-date: "Due 3/1/2023"
+date: "Due 2/28/2024"
 output: 
   html_document:
     toc: true

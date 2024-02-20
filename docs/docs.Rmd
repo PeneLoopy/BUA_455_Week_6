@@ -160,11 +160,11 @@ class: bottom, right
 
 - Grading is in progress, but can not be discussed until all grades are entered.
 
-- I hope that all quizzes will be graded by this weekend or early next week.
+- I hope that all quizzes will be graded by this weekend.
 
 <br>
 
-### HW 4 is posted and is due next week on Wednesday, 10/11/23.
+### HW 4 is posted and is due next week on Wednesday, 2/28/23.
 
 - We will work through it together on Thursday
 
@@ -227,7 +227,7 @@ Function_Name <- function(input_1, input_2, etc){
 #### Anatomy of a Function (Option 2):
 
 - Commands within function **are saved** to an object.
-- Function must end with name of object so that results are 'kicked out' as output.
+- Function should end with name of object so that results are 'kicked out' as output.
 
 
 ```
@@ -363,9 +363,9 @@ Sys.Date()   #demo of Sys.date
 
 ---
 
-### Week 6 In-class Exercises (L10 - Q1)
+### Week 6 In-class Exercises (Q1)
 
-***Session ID: bua455s23***
+***Session ID: bua455s24***
 
 What is the correct `lubridate` command to convert "March 1st, 2022" to a date value in R.
 
@@ -475,15 +475,15 @@ bom2018_Op3 <- bom_cln_out(data_file = "box_office_mojo_2018.csv", yr = 2018, sk
 
 ---
 
-### Week 6 In-class Exercises (L10 - Q2)
+### Week 6 In-class Exercises (Q2)
 
-***Session ID: bua455s23***
+***Session ID: bua455s24***
 
-The end result of any function is an output, e.g. a value, a dataset, a vector, etc.
+When using Options, what output(s) is created?
 
-What happens if you use Option 2 where you save work to an object, `d_out`, but you don't end the function with that object name?
-
-**In-class Demo:** Edit the Option 2 function by removing the `d_out` at the end to see what happens.
+A. A exported .csv file 
+B. A clean tibble dataset saved to the Global Environment
+C. Both an exported .csv file and a clean tibble dataset in R
 
 <br>
 
